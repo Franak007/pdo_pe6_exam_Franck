@@ -46,20 +46,34 @@ $actors = $actorRepository->findAll();
     </nav>
 </header>
 <div class="text-center w-100 d-flex align-items-center justify-content-center">
-    <div class="mx-auto w-75">
-        <h1 class="mb-5">Liste des films</h1>
-            <?php foreach ($movies as $movie) : ?>
-                <p><?= $movie['title'] ?></p>
-            <?php endforeach ?>
-    </div>
+    <table>
+        <thead>
+        <tr>
+            <th colspan="2" class="fs-2">Liste des Films</th>
+        </tr>
+        </thead>
+
+        <?php foreach ($movies as $movie) : ?>
+            <tr>
+                <th scope="col" class="border-3"><?= $movie['title']?></th>
+            </tr>
+        <?php endforeach ?>
+    </table>
 </div>
 <div class="text-center w-100 d-flex align-items-center justify-content-center">
-    <div class="mx-auto w-75">
-        <h1 class="mb-5">Liste des Acteurs</h1>
+    <table>
+        <thead>
+        <tr>
+            <th colspan="2" class="fs-2">Liste des Acteurs</th>
+        </tr>
+        </thead>
+
             <?php foreach ($actors as $actor) : ?>
-                <p><?= $actor['first_name']. ' ' . $actor['last_name'] ?></p>
+            <tr>
+                <th scope="col" class="border-3"><?= $actor['first_name']. ' ' . $actor['last_name'] ?></th>
+            </tr>
             <?php endforeach ?>
-    </div>
+    </table>
 </div>
 </body>
 </html>
