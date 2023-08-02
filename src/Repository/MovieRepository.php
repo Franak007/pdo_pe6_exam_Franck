@@ -26,7 +26,11 @@ class MovieRepository
     //array de Movie si en objet
     public function findByTitle(string $title): array
     {
-
+        $query = $this->pdoService->getPDO()->prepare("SELECT * FROM movie WHERE title LIKE :title");
+        $like = '%' . $title . '%';
+        $query->bindParam(':title', $like);
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     //Movie si en objet
