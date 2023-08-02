@@ -16,7 +16,7 @@ class MovieRepository
 
 
     //array de Movie si en objet
-    public function findAll():array
+    public function findAll(): array
     {
         $query = $this->pdoService->getPdo()->query("SELECT * FROM movie");
         return $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -24,14 +24,20 @@ class MovieRepository
     }
 
     //array de Movie si en objet
-    public function findByTitle(string $title):array
+    public function findByTitle(string $title): array
     {
 
     }
 
     //Movie si en objet
-    public function insertMovie(Models\Movie|array $movie): Movie|array
+    public function insertMovie(array $array)
     {
+        $query = $this->pdoService->getPdo()->prepare(
+            "INSERT INTO movie(title, release_date) VALUES(:title, :date)"
+        );
+        $query->bindParam(':title', $array['title']);
+        $query->bindParam(':date', $array['releaseDate']);
 
+        $query->execute();
     }
 }

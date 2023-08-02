@@ -23,8 +23,14 @@ class ActorRepository
     }
 
     //Actor si en objet
-    public function insertActor(Actor|array $actor): Actor|array
+    public function insertActor(array $array)
     {
+        $query = $this->pdoService->getPdo()->prepare(
+            "INSERT INTO actor(first_name, last_name) VALUES(:firstName, :lastName)"
+        );
+        $query->bindParam(':firstName', $array['firstName']);
+        $query->bindParam(':lastName', $array['lastName']);
 
+        $query->execute();
     }
 }
