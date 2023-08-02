@@ -3,13 +3,22 @@
 namespace App\Repository;
 
 use App\Models\Actor;
+use App\Service\PDOService;
 
 class ActorRepository
 {
+    private PDOService $pdoService;
+
+    public function __construct()
+    {
+        $this->pdoService = new PDOService();
+    }
 
     //array d'Actor si en objet
     public function findAll():array
     {
+        $query = $this->pdoService->getPdo()->query("SELECT * FROM actor");
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
 
     }
 

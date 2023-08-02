@@ -2,6 +2,18 @@
 
 include_once __DIR__ . '/vendor/autoload.php';
 
+use App\Service\PDOService;
+use App\Repository\MovieRepository;
+
+
+$movieRepository = new MovieRepository();
+
+$movies = $movieRepository->findAll();
+
+$actorRepository = new \App\Repository\ActorRepository();
+
+$actors = $actorRepository->findAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -36,13 +48,17 @@ include_once __DIR__ . '/vendor/autoload.php';
 <div class="text-center w-100 d-flex align-items-center justify-content-center">
     <div class="mx-auto w-75">
         <h1 class="mb-5">Liste des films</h1>
-        <!-- Gérer l'affichage des films dans un tableau ici -->
+            <?php foreach ($movies as $movie) : ?>
+                <p><?= $movie['title'] ?></p>
+            <?php endforeach ?>
     </div>
 </div>
 <div class="text-center w-100 d-flex align-items-center justify-content-center">
     <div class="mx-auto w-75">
         <h1 class="mb-5">Liste des Acteurs</h1>
-        <!-- Gérer l'affichage des acteurs dans un tableau ici -->
+            <?php foreach ($actors as $actor) : ?>
+                <p><?= $actor['first_name']. ' ' . $actor['last_name'] ?></p>
+            <?php endforeach ?>
     </div>
 </div>
 </body>
